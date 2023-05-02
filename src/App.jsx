@@ -74,6 +74,7 @@ function App() {
     })
       .then(response => response.json())
       .then(json => {
+        setLinkError(false)
         console.log(json.body)
         setSummarizedData(json?.body)
         setIsLoading(false)
