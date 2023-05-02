@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="">
       <div className='flex justify-center w-full absolute bg-gray-100 min-h-screen'>
-        <div className="xlmin:w-2/4 xlmax:w-3/4 rounded-lg text-4xl font-bold absolute mt-12 bg-white p-6">
+        <div className="xlmin:w-2/4 xlmax:w-3/4 rounded-lg text-4xl font-bold absolute mt-12 bg-white p-6 z-100">
           Youtube Transcript Summarizer
           <div className='mt-6'>
             <div className="flex flex-col p-1.5 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
@@ -34,7 +34,7 @@ function App() {
             </div>
           </div>
           {summarizedData &&
-            <div className='panda min-h-0 mt-8 mb-2 text-2xl text-gray-600 text-justify'>
+            <div className='panda overflow-y-hidden min-h-0 mt-8 mb-2 text-2xl text-gray-600 text-justify z-2'>
               {summarizedData}
             </div>
           }

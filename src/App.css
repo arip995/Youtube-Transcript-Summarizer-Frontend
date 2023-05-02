@@ -76,7 +76,7 @@ input::placeholder {
 }
 
 .panda {
-   animation: 2s ease-in 0s slideInFromLeft;
+   animation: 2s ease-in slideInFromLeft;
 }
 
 @keyframes slideInFromLeft {
