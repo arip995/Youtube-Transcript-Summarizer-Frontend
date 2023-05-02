@@ -104,7 +104,7 @@ function App() {
           }
 
           {linkError &&
-            <div className='mt-2'>
+            <div className='mt-4'>
               <div className="text-lg text-red-600 font-light">Invalid url!</div>
             </div>
           }

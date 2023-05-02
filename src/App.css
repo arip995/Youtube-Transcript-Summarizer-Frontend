@@ -76,7 +76,7 @@ input::placeholder {
 }
 
 .panda {
-   animation: 1.5s ease-in-out slideInFromLeft;
+   animation: 3s ease-in-out slideInFromLeft;
 }
 
 @keyframes slideInFromLeft {
@@ -85,7 +85,7 @@ input::placeholder {
     /* opacity: 0%; */
   }
   100% {
-    max-height: 300px;
+    max-height: 1000px;
     /* opacity: 100%; */
   }
 }
