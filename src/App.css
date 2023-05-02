@@ -89,3 +89,24 @@ input::placeholder {
     opacity: 100%;
   }
 }
+#loading-bar-spinner.spinner {
+  position: absolute;
+  z-index: 19 !important;
+  animation: loading-bar-spinner 800ms linear infinite;
+}
+
+#loading-bar-spinner.spinner .spinner-icon {
+  width: 30px;
+  height: 30px;
+  border:  solid 2px transparent;
+  /* border-top-color:  rgb(59 130 246 ) !important;
+  border-left-color: rgb(59 130 246 ) !important; */
+  border-top-color:  rgb(55 65 81) !important;
+  border-left-color: rgb(55 65 81) !important;
+  border-radius: 50%;
+}
+
+@keyframes loading-bar-spinner {
+0%   { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
