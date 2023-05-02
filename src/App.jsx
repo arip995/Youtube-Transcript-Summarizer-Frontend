@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react';
 import './App.css';
-const axios = require('axios');
 
 function App() {
   const [summarizedData, setSummarizedData] = useState(null);
-  const [link, setLink] = useState(null);
+  const [link, setLink] = useState(" ");
   const [lenght, setLenght] = useState("Medium");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [linkError, setLinkError] = useState(false);
   const dropdownItems = {
     "small": 0.075,
     "medium": 0.25,
@@ -17,33 +17,24 @@ function App() {
   }
 
   const handleChange = (event) => {
-    setLink(event.target.value)
+    
   }
 
-  async function handleClick() {
+  const handleClick = (event) => {
+    setLink(event.target.value)
     setIsLoading(true);
     setSummarizedData(null);
-
-    // const response = await axios.get('https://jsonplaceholder.typicode.com/comments/1')
-    // const json = await response.json()
-    // setSummarizedData(json?.body)
-    //     setLenght("MEDIUM");
-    //     setIsLoading(false)
-
-    //Maghia payload ta mu dei deichi to khali endpoint ta change karidabu
-    // axios.post('https://jsonplaceholder.typicode.com/comments/1',{
-    //   params: {
-    //     link:link, percentage:dropdownItems["medium"]
-    //   }
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     console.log(json.body)
-    //     setSummarizedData(json?.body)
-    //     setLenght("MEDIUM");
-    //     setIsLoading(false)
-    //   })
-
+    if (link) {
+      var regExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      const a = link.match(regExp)
+      console.log(a)
+      if (link.match(regExp)) {
+      }else{
+        console.log("hi")
+        setLinkError(true);
+        return;
+      }
+    }
     fetch('https://jsonplaceholder.typicode.com/comments/1', {
       method: "POST",
       body: JSON.stringify({ link: link, percentage: dropdownItems["medium"] }),
@@ -54,6 +45,7 @@ function App() {
     })
       .then(response => response.json())
       .then(json => {
+        setLinkError(false)
         console.log(json.body)
         setSummarizedData(json?.body)
         setLenght("MEDIUM");
@@ -100,14 +92,20 @@ function App() {
               />
 
               <button className="px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
-                onClick={() => handleClick()}
+                onClick={(event) => handleClick(event)}
               >Generate summary</button>
             </div>
           </div>
 
-          {isLoading &&
+          {(isLoading && !linkError) &&
             <div className='mt-4 mb-10'>
               <div id="loading-bar-spinner" className="spinner"><div className="spinner-icon"></div></div>
+            </div>
+          }
+
+          {linkError &&
+            <div className='mt-2'>
+              <div className="text-lg text-red-600 font-light">Invalid url!</div>
             </div>
           }
 
