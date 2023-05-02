@@ -1,30 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
   const [summarizedData, setSummarizedData] = useState(null);
-  useEffect(() => {
+  const [link, setLink] = useState(null);
+
+  const handleChange = (event) => {
+    setLink(event.target.value)
+  }
+  const handleClick = () => {
+    console.log("Panda")
     fetch('https://jsonplaceholder.typicode.com/comments/1')
-      .then(response => response.json())
-      .then(json => {
-        console.log(json.body)
-        setSummarizedData(json?.body)
-      })
-  }, [])
+    .then(response => response.json())
+    .then(json => {
+      console.log(json.body)
+      setSummarizedData(json?.body)
+    })
+  }
   return (
     <div className="">
       <div className='flex justify-center w-full absolute bg-gray-100 min-h-screen'>
         <div className="xlmin:w-2/4 xlmax:w-3/4 rounded-lg text-4xl font-bold absolute mt-12 bg-white p-6">
           Youtube Transcript Summarizer
-          <form className='mt-6'>
-            <div class="flex flex-col p-1.5 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
-              <input class="px-2  text-gray-700 placeholder-gray-500 bg-white outline-none d focus:placeholder-transparent" type="text" name="email" placeholder="Paste youtube link" aria-label="Enter your email" />
+          <div className='mt-6'>
+            <div className="flex flex-col p-1.5 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
+              <input className="px-2  text-gray-700 placeholder-gray-500 bg-white outline-none d focus:placeholder-transparent" type="text" name="youtube" placeholder="Paste youtube link" aria-label="paste youtube link" 
+              onChange={(event) => handleChange(event)}
+              />
 
-              <button class="px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">Generate summary</button>
+              <button className="px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
+                onClick={() => handleClick()}
+              >Generate summary</button>
             </div>
-          </form>
+          </div>
           {summarizedData &&
-            <div className='mt-12 text-2xl text-gray-600 text-justify'>
+            <div className='panda min-h-0 mt-8 mb-2 text-2xl text-gray-600 text-justify'>
               {summarizedData}
             </div>
           }

@@ -56,15 +56,6 @@
   }
 }
 
-/* @keyframes blink {
-      from, to { 
-          border-color: transparent 
-      }
-      50% { 
-          border-color: rgb(92, 86, 86); 
-      }
-  } */
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -82,4 +73,19 @@
 input,
 input::placeholder {
     font: 18px/3 sans-serif;
+}
+
+.panda {
+   animation: 2s ease-in 0s slideInFromLeft;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    max-height: 1px;
+    opacity: 0%;
+  }
+  100% {
+    max-height: 300px;
+    opacity: 100%;
+  }
 }
