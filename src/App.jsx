@@ -48,7 +48,7 @@ function App() {
         setLinkError(false)
         console.log(json.body)
         setSummarizedData(json?.body)
-        setLenght("MEDIUM");
+        setLenght("medium");
         setIsLoading(false)
       })
   }
