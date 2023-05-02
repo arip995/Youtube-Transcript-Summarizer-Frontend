@@ -76,17 +76,17 @@ input::placeholder {
 }
 
 .panda {
-   animation: 2s ease-in slideInFromLeft;
+   animation: 1.5s ease-in-out slideInFromLeft;
 }
 
 @keyframes slideInFromLeft {
   0% {
     max-height: 1px;
-    opacity: 0%;
+    /* opacity: 0%; */
   }
   100% {
     max-height: 300px;
-    opacity: 100%;
+    /* opacity: 100%; */
   }
 }
 #loading-bar-spinner.spinner {
