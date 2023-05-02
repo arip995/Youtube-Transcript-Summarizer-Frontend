@@ -40,15 +40,13 @@ function App() {
     setLenght(precision);
     setIsOpen(!isOpen);
     setSummarizedData(null);
-    setTimeout(() => {
-      fetch('https://jsonplaceholder.typicode.com/comments/5')
-        .then(response => response.json())
-        .then(json => {
-          console.log(json.body)
-          setSummarizedData(json?.body)
-          setIsLoading(false)
-        })
-    }, 3000);
+    fetch('https://jsonplaceholder.typicode.com/comments/5')
+      .then(response => response.json())
+      .then(json => {
+        console.log(json.body)
+        setSummarizedData(json?.body)
+        setIsLoading(false)
+      })
   }
 
   return (
