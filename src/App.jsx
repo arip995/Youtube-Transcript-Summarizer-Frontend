@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react';
 import './App.css';
+const axios = require('axios');
+
 function App() {
   const [summarizedData, setSummarizedData] = useState(null);
   const [link, setLink] = useState(null);
@@ -18,12 +20,38 @@ function App() {
     setLink(event.target.value)
   }
 
-  const handleClick = () => {
+  async function handleClick() {
     setIsLoading(true);
     setSummarizedData(null);
 
+    // const response = await axios.get('https://jsonplaceholder.typicode.com/comments/1')
+    // const json = await response.json()
+    // setSummarizedData(json?.body)
+    //     setLenght("MEDIUM");
+    //     setIsLoading(false)
+
     //Maghia payload ta mu dei deichi to khali endpoint ta change karidabu
-    fetch('https://jsonplaceholder.typicode.com/comments/1',{link:link, percentage:dropdownItems["medium"]})
+    // axios.post('https://jsonplaceholder.typicode.com/comments/1',{
+    //   params: {
+    //     link:link, percentage:dropdownItems["medium"]
+    //   }
+    // })
+    //   .then(response => response.json())
+    //   .then(json => {
+    //     console.log(json.body)
+    //     setSummarizedData(json?.body)
+    //     setLenght("MEDIUM");
+    //     setIsLoading(false)
+    //   })
+
+    fetch('https://jsonplaceholder.typicode.com/comments/1', {
+      method: "POST",
+      body: JSON.stringify({ link: link, percentage: dropdownItems["medium"] }),
+
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
       .then(response => response.json())
       .then(json => {
         console.log(json.body)
@@ -44,7 +72,14 @@ function App() {
     setSummarizedData(null);
 
     //Maghia payload ta mu dei deichi to khali endpoint ta change karidabu
-    fetch('https://jsonplaceholder.typicode.com/comments/5',{link:link, percentage:dropdownItems[precision]})
+    fetch('https://jsonplaceholder.typicode.com/comments/5', {
+      method: "POST",
+      body: JSON.stringify({ link: link, percentage: dropdownItems[precision] }),
+
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
       .then(response => response.json())
       .then(json => {
         console.log(json.body)
@@ -72,27 +107,27 @@ function App() {
 
           {isLoading &&
             <div className='mt-4 mb-10'>
-              <div id="loading-bar-spinner" class="spinner"><div class="spinner-icon"></div></div>
+              <div id="loading-bar-spinner" className="spinner"><div className="spinner-icon"></div></div>
             </div>
           }
 
           {summarizedData &&
             <div className="mt-4">
-              <div class="relative inline-block">
-                <button onClick={() => handleDropdown()} class="relative z-10 flex items-center p-2 text-sm text-gray-100 uppercase tracking-wide border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring-blue-300 focus:ring bg-gray-700 focus:outline-none">
-                  <span class="mx-1">{lenght}</span>
-                  <svg class="w-5 h-5 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <div className="relative inline-block">
+                <button onClick={() => handleDropdown()} className="relative z-10 flex items-center p-2 text-sm text-gray-100 uppercase tracking-wide border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring-blue-300 focus:ring bg-gray-700 focus:outline-none">
+                  <span className="mx-1">{lenght}</span>
+                  <svg className="w-5 h-5 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                   </svg>
                 </button>
 
                 {isOpen &&
                   <div
-                    class="absolute left-0 z-20 w-48 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800"
+                    className="absolute left-0 z-20 w-48 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800"
                   >
                     {Object.keys(dropdownItems).map((item, index) => {
                       return (
-                        <a key={index} onClick={() => { handlePrecision(item) }} href="#" class="block uppercase px-4 py-3 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"> {item} </a>
+                        <a key={index} onClick={() => { handlePrecision(item) }} href="#" className="block uppercase px-4 py-3 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"> {item} </a>
                       )
                     })}
                   </div>
