@@ -21,7 +21,9 @@ function App() {
   const handleClick = () => {
     setIsLoading(true);
     setSummarizedData(null);
-    fetch('https://jsonplaceholder.typicode.com/comments/1')
+
+    //Maghia payload ta mu dei deichi to khali endpoint ta change karidabu
+    fetch('https://jsonplaceholder.typicode.com/comments/1',{link:link, percentage:dropdownItems["medium"]})
       .then(response => response.json())
       .then(json => {
         console.log(json.body)
@@ -40,7 +42,9 @@ function App() {
     setLenght(precision);
     setIsOpen(!isOpen);
     setSummarizedData(null);
-    fetch('https://jsonplaceholder.typicode.com/comments/5')
+
+    //Maghia payload ta mu dei deichi to khali endpoint ta change karidabu
+    fetch('https://jsonplaceholder.typicode.com/comments/5',{link:link, percentage:dropdownItems[precision]})
       .then(response => response.json())
       .then(json => {
         console.log(json.body)
