@@ -105,10 +105,6 @@ function App() {
           }
         </div>
       </div>
-
-      {/* <div class="writer">
-            <div class="writer-text">Apana tike gandi marantu</div>
-        </div> */}
     </div>
   );
 }
